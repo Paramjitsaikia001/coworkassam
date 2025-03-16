@@ -153,7 +153,7 @@ function Landing() {
                 <div className="py-16 grid md:grid-cols-2 gap-12 items-center">
                     <div>
                         <h2 className="text-5xl font-bold mb-8">
-                            Coworkerassam is <br />
+                            Coworkassam is <br />
                             waiting for you !!!
                         </h2>
                         <p className="text-2xl font-thin">
