@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
+import ContactButton from "./Contact";
 import { useRef } from "react";
 // Import images 
 import flexibleImg from "../assets/flexible.jpg";
@@ -61,6 +62,7 @@ const WhyChooseUs: React.FC = () => {
       transition={{ duration: 0.6 }}
       className="py-16 px-4 bg-white"
     >
+      <ContactButton/>
       <div className="container mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

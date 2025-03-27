@@ -22,7 +22,7 @@ function Navbar() {
             onClick={toggleMenu} 
             className="focus:outline-none"
             >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={30} /> : <Menu size={30} />}
             </button>
             </div>
 
@@ -52,7 +52,7 @@ function Navbar() {
 
             {/* Mobile Navigation */}
             <div
-            className={`md:hidden w-full flex  flex-col gap-2 mt-4 transition-all duration-300 transform bg-[#ffffffbf] ${
+            className={`md:hidden w-full px-5 text-xl flex  flex-col gap-2 mt-4 transition-all duration-300 transform bg-[#ffffffbf] ${
             isMenuOpen ? 'opacity-100 max-h-screen translate-y-0' : 'opacity-0 max-h-0 -translate-y-4 overflow-hidden'
             }`}
             >
