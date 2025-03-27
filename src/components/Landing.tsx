@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { AnimatePresence } from 'framer-motion';
+import { Wifi, Users, Monitor, Printer, Calendar, Coffee } from 'lucide-react';
 import { MotionConfig } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { MapPin, Star } from 'lucide-react';
@@ -71,9 +73,9 @@ const HeroSection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="hero-section py-10 px-6 md:py-10 flex flex-col md:flex-row justify-between gap-12 h-auto md:h-[78vh] items-center relative"
+        className="hero-section py-10 px-6 md:py-10 flex flex-col-reverse md:flex-row justify-between gap-12 h-auto md:h-[78vh] relative"
     >
-        <div className="w-full md:w-[30%] flex flex-col items-baseline gap-4">
+        <div className="w-[80%] md:w-[30%] flex flex-col md:justify-end md:pb-8 items-baseline gap-4">
             <p className="text-base md:text-lg">
                 Whether you're a freelancer looking for your next creative space
                 or a team searching for a collaborative environment for your
@@ -81,7 +83,7 @@ const HeroSection = () => (
             </p>
             <div className="flex flex-col gap-3 w-full ">
                 <button
-                    onClick={() => window.location.href = '/booktour'}
+                    onClick={() => (window.location.href = '/booktour')}
                     className="bg-black rounded-3xl py-3 px-8 text-white items-start flex cursor-pointer hover:bg-gray-800 transition-colors"
                     aria-label="Book your space"
                 >
@@ -96,7 +98,7 @@ const HeroSection = () => (
             </div>
         </div>
         <div className="w-full md:w-auto mt-8 md:mt-0 z-10">
-            <h1 className="flex flex-col items-center md:items-end text-6xl md:text-8xl lg:text-[8.5rem] font-extrabold leading-none ">
+            <h1 className="flex flex-col items-end md:items-end text-6xl md:text-8xl lg:text-[8.5rem] font-extrabold leading-none ">
                 Where <br />
                 <span className="text-green-500 [text-shadow:3px_3px_0px_black]">
                     Innovation
@@ -108,6 +110,7 @@ const HeroSection = () => (
     </motion.section>
 );
 
+//category section
 const CategorySection = () => {
     const [maximizedIndex, setMaximizedIndex] = useState<number | null>(null);
     const controls = useAnimation();
@@ -143,7 +146,7 @@ const CategorySection = () => {
                 visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.5 }}
-            className="relative flex flex-wrap gap-2 items-center justify-center max-w-8xl bg-green-500 shadow-[1px_5px_0px_#000] rounded-2xl h-[35rem] overflow-hidden  my-12"
+            className="relative flex flex-wrap gap-2 items-center justify-center max-w-8xl bg-green-500 shadow-[1px_5px_0px_#000] rounded-2xl h-[35rem] overflow-hidden cursor-pointer  my-12"
             aria-label="Workspace Categories"
         >
             <motion.div
@@ -157,7 +160,7 @@ const CategorySection = () => {
                 }}
                 className="absolute top-0 left-0 w-full h-full bg-white opacity-15 pointer-events-none"
             />
-            <div className="w-full h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 rounded-2xl">
+            <div className="w-full h-full overflow-y-scroll overflow-x-hidden scrollbar-thin  scrollbar-thumb-gray-100 scrollbar-track-gray-200 rounded-2xl">
                 {CATEGORIES.map((category, index) => (
                     <motion.div
                         key={category.id}
@@ -182,12 +185,12 @@ const CategorySection = () => {
                         }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
-                        <div className="absolute inset-0 bg-black/40 w-[40%] flex flex-col items-start justify-end py-12 px-[5rem]  text-start">
-                            <h3 className="text-xl font-bold text-black mb-4 bg-yellow-400 shadow-[3px_3px_0px_black] rounded-full px-4 py-2">
+                        <div className="absolute inset-0 md:bg-black/40 bg-black/10 w-[40%] flex flex-col items-start md:justify-end justify-baseline md:py-12 py-4 md:px-[5rem] px-2  text-start">
+                            <h3 className="md:text-xl text-[10px] text-center w-full font-bold text-black mb-4 bg-yellow-400 shadow-[3px_3px_0px_black] rounded-full md:px-4 px-2 py-2">
                                 {category.name}
                             </h3>
                             <p
-                                className={`text-white text-lg transition-opacity duration-300 ${
+                                className={`text-white hidden md:block text-lg transition-opacity duration-300 ${
                                     maximizedIndex === index
                                         ? 'opacity-100'
                                         : 'opacity-100'
@@ -264,10 +267,10 @@ const AboutSection = () => {
         >
             <motion.h2
                 variants={itemVariants}
-                className="text-[8.5rem] px-3 w-full font-bold mb-8 leading-[8rem] text-start flex flex-col"
+                className="md:text-[8.5rem] text-5xl px-3 w-full font-bold mb-8 md:leading-[8rem] leading-[3.5rem] text-start flex flex-col"
             >
                 What is{' '}
-                <span className="text-green-500 text-[8.5rem]  [text-shadow:3px_3px_0px_black]">
+                <span className="text-green-500   [text-shadow:3px_3px_0px_black]">
                     Coworkassam
                 </span>{' '}
                 For ?
@@ -306,17 +309,17 @@ const AboutSection = () => {
                             onMouseLeave={() => setActiveCategory('startups')}
                             layout
                         >
-                            <div className="p-4 h-full items-center text-center justify-evenly flex flex-col">
+                            <div className="p-4 h-full items-center text-center gap-12 flex flex-col">
                                 <motion.h3
                                     layout="position"
-                                    className="text-black text-5xl font-bold"
+                                    className="text-black md:text-5xl text-2xl font-bold"
                                 >
                                     {category.title}
                                 </motion.h3>
 
                                 {/* Content visible only when active */}
                                 <motion.div
-                                    className="mt-6 text-black flex flex-col items-center text-xl"
+                                    className="md:mt-6 mt-0 text-black flex flex-col items-center md:text-xl text-sm"
                                     initial={{ opacity: 0 }}
                                     animate={{
                                         opacity: isActive ? 1 : 0,
@@ -409,8 +412,12 @@ const StatsSection = () => {
 
             {/* Features Section */}
             <section className="px-12 py-8 bg-white">
-                <h2 className="text-[8rem] font-bold mb-16 text-start leading-none">
-                    Our Workspace Features
+                <h2 className="md:text-[8rem] text-6xl  font-bold mb-16 text-start leading-none">
+                    Our{' '}
+                    <span className="text-green-500 [text-shadow:3px_3px_0px_black]">
+                        Workspace
+                    </span>{' '}
+                    Features
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -622,10 +629,6 @@ const FeatureCard = ({
     );
 };
 
-import { AnimatePresence } from 'framer-motion';
-import { Wifi, Users, Monitor, Printer, Calendar, Coffee } from 'lucide-react';
-
-// Features & Amenities Section
 const FeaturesAmenities = () => {
     const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
@@ -692,10 +695,10 @@ const FeaturesAmenities = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="py-2 px-4 my-12"
+            className="py-6 px-4 md:px-12 my-12"
         >
-            <div className="featuresheadline text-end">
-                <h2 className="text-[8.5rem] font-bold mb-8 flex flex-col leading-[7.5rem]">
+            <div className="text-center md:text-end">
+                <h2 className="text-5xl md:text-[8rem] font-bold mb-8 leading-tight">
                     Features{' '}
                     <span className="text-yellow-500 [text-shadow:3px_3px_0px_black]">
                         &
@@ -703,8 +706,33 @@ const FeaturesAmenities = () => {
                     Amenities
                 </h2>
             </div>
-            {/* Central feature description container - only shows when hovering */}
-            <div className="relative min-h-screen bg-gray-50 font-sans">
+
+            {/* Mobile Grid Layout */}
+            <div className="md:hidden grid grid-cols-1 gap-6">
+                {features.map((feature) => (
+                    <motion.div
+                        key={feature.id}
+                        className="flex flex-col items-center text-center bg-white p-6 rounded-2xl 
+                                   shadow-md transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
+                    >
+                        {/* Feature Icon */}
+                        <div className="text-blue-600 mb-4">{feature.icon}</div>
+
+                        {/* Feature Title */}
+                        <h3 className="text-xl font-bold mb-2 text-gray-900">
+                            {feature.title}
+                        </h3>
+
+                        {/* Feature Description */}
+                        <p className="text-gray-600 text-sm md:text-base">
+                            {feature.description}
+                        </p>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Desktop Hover Layout */}
+            <div className="hidden md:block relative min-h-screen bg-gray-50 font-sans">
                 <AnimatePresence>
                     {hoveredFeature && (
                         <motion.div
@@ -715,7 +743,7 @@ const FeaturesAmenities = () => {
                             transition={{ duration: 0.3 }}
                             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 z-20 "
                         >
-                            <div className="w-full h-full bg-white  p-8 flex flex-col items-center justify-center text-center rounded-2xl shadow-[1px_5px_0px_0px_#000]  ">
+                            <div className="w-full h-full bg-white p-8 flex flex-col items-center justify-center text-center rounded-2xl shadow-[1px_5px_0px_0px_#000]  ">
                                 <div className="text-blue-600 mb-4">
                                     {
                                         features.find(
@@ -742,7 +770,7 @@ const FeaturesAmenities = () => {
                     )}
                 </AnimatePresence>
 
-                {/* Feature listings */}
+                {/* Feature Listings */}
                 <div className="relative z-0">
                     {features.map((feature) => (
                         <motion.div
@@ -801,7 +829,7 @@ function LocationSection() {
             transition={{ duration: 0.8 }}
             className="min-h-screen bg-gradient-to-br rounded-xl from-blue-50 to-blue-100 flex flex-col"
         >
-            <div className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto px-4  py-16 grid md:grid-cols-2 gap-12 items-center">
                 {/* Content Section */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -809,7 +837,7 @@ function LocationSection() {
                     transition={{ duration: 0.8 }}
                     className="space-y-6"
                 >
-                    <h1 className="text-7xl font-bold text-gray-800 leading-tight">
+                    <h1 className="md:text-7xl text-5xl font-bold text-gray-800 leading-tight">
                         Coworkassam
                         <br />
                         is waiting for you!
@@ -933,7 +961,7 @@ function FAQPage() {
                             ease: [0.22, 1, 0.36, 1],
                         }}
                     >
-                        <motion.h1 className="text-8xl font-bold text-start mb-6">
+                        <motion.h1 className="md:text-8xl text-6xl font-bold text-start mb-6">
                             Frequently Asked{' '}
                             <span className="text-green-400 [text-shadow:3px_3px_0px_black]">
                                 Questions
@@ -1102,6 +1130,9 @@ function FAQPage() {
 }
 
 function Landing() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="min-h-screen bg-white">
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -150,14 +150,14 @@ export default function PricingSection() {
     return (
         <section className="py-20 px-4 bg-gradient-to-b from-white to-slate-50">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center flex flex-col gap-3 items-center mb-16 w-full">
                     <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-5xl font-bold mb-4"
+                        className="text-2xl text-center  w-[10rem] font-bold mb-4 bg-yellow-400 rounded-full shadow-[0px_5px_0px_0px_#000]  px-4 py-1"
                     >
-                        Simple, Transparent Pricing
+                        Pricing
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -231,11 +231,13 @@ export default function PricingSection() {
                         <motion.div
                             key={plan.name}
                             variants={itemVariants}
-                            className={`relative rounded-xl border ${plan.borderColor} bg-card shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md ${plan.popular ? 'ring-2 ring-primary' : ''}`}
+                            className={`relative rounded-xl border hover:shadow-[2px_5px_0px_0px_#000] cursor-pointer ${plan.borderColor} bg-card shadow-sm overflow-hidden transition-all duration-300  ${
+                                plan.popular ? 'ring-2 ring-[#4CAF50]' : ''
+                            }`}
                         >
                             {plan.popular && (
                                 <div className="absolute top-0 right-0">
-                                    <div className="text-xs font-semibold px-3 py-1 bg-primary text-white rounded-bl-lg">
+                                    <div className="text-xs font-semibold px-3 py-1 bg-[#4CAF50] text-white rounded-bl-lg">
                                         Most Popular
                                     </div>
                                 </div>
@@ -283,10 +285,10 @@ export default function PricingSection() {
                                 </ul>
 
                                 <button
-                                    className={`w-full mt-6 px-4 py-2 rounded-md transition-colors duration-300 ${
+                                    className={`w-full mt-6 px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#4CAF50] cursor-pointer ${
                                         plan.popular
-                                            ? 'bg-primary text-white hover:bg-primary/90'
-                                            : 'border border-primary text-primary hover:bg-primary/10'
+                                            ? 'bg-[#4CAF50] text-white hover:bg-[#4CAF50]/90'
+                                            : 'border border-[#4CAF50] text-[#4CAF50] hover:bg-[#4CAF50]/10'
                                     }`}
                                     onClick={() => sendEmail(plan.name)}
                                 >
@@ -297,90 +299,6 @@ export default function PricingSection() {
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    className="mt-16 p-6 rounded-xl border border-gray-200 bg-white shadow-sm"
-                >
-                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                        <div className="md:w-1/4">
-                            <div className="flex items-center gap-3 mb-2">
-                                <Zap className="size-5 text-primary" />
-                                <h3 className="text-xl font-bold">
-                                    All plans include
-                                </h3>
-                            </div>
-                            <p className="text-gray-600 text-sm">
-                                Core amenities available to all Cowork Assam
-                                members
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:w-3/4">
-                            <div className="flex items-center gap-3">
-                                <div className="size-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                    <Wifi className="size-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">
-                                        High-Speed WiFi
-                                    </p>
-                                    <p className="text-xs text-gray-600">
-                                        Reliable, fast internet
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-center gap-3">
-                                <div className="size-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
-                                    <Coffee className="size-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">
-                                        Free Refreshments
-                                    </p>
-                                    <p className="text-xs text-gray-600">
-                                        Coffee, tea & water
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-center gap-3">
-                                <div className="size-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                                    <Users className="size-5" />
-                                </div>
-                                <div>
-                                    <p className="font-medium">
-                                        Community Events
-                                    </p>
-                                    <p className="text-xs text-gray-600">
-                                        Networking opportunities
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 1 }}
-                    className="text-center mt-12 text-sm text-gray-600"
-                >
-                    <p>
-                        Need a custom solution for your team?{' '}
-                        <a
-                            href="#"
-                            className="text-primary font-medium hover:underline"
-                        >
-                            Contact us
-                        </a>{' '}
-                        for enterprise pricing.
-                    </p>
                 </motion.div>
             </div>
         </section>

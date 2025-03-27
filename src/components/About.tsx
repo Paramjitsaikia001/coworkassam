@@ -1,13 +1,195 @@
-import { useState, useEffect } from "react";
-import flexible from '../assets/flexible.jpg';
-import aboutIMG from '../assets/aboutimg.avif';
-import community from '../assets/community.webp';
-import amenities from '../assets/ameneties.webp';
-const About = () => {
+import React, { useState, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useRef } from "react";
+// Import images 
+import flexibleImg from "../assets/flexible.jpg";
+import BackgroundShapes from "./BackgroundShapes";
+// Import Pricing Section and other components
+import PricingSection from "./Pricing";
+
+// Why Choose Us Component
+const WhyChooseUs: React.FC = () => {
+  const chooseUsCategories = [
+    {
+      icon: "🚀",
+      title: "Flexible Workspace Solutions",
+      description: "Choose from a variety of workspace options including hot desks, dedicated desks, private cabins, and meeting rooms. Adapt your workspace to your evolving business needs without long-term commitments.",
+      color: "bg-blue-100",
+      textColor: "text-blue-800"
+    },
+    {
+      icon: "🌐",
+      title: "High-Speed Connectivity",
+      description: "Stay connected with our enterprise-grade high-speed internet. Enjoy uninterrupted video calls, fast file transfers, and seamless online collaboration with dedicated bandwidth for professionals.",
+      color: "bg-green-100",
+      textColor: "text-green-800"
+    },
+    {
+      icon: "🤝",
+      title: "Networking Opportunities",
+      description: "Connect with a diverse community of entrepreneurs, freelancers, and innovators. Participate in regular workshops, networking events, and collaborative sessions to expand your professional network.",
+      color: "bg-purple-100",
+      textColor: "text-purple-800"
+    },
+    {
+      icon: "💡",
+      title: "Professional Amenities",
+      description: "Access state-of-the-art amenities including ergonomic furniture, high-quality printing facilities, fully equipped meeting rooms, relaxation zones, and complimentary refreshments.",
+      color: "bg-orange-100",
+      textColor: "text-orange-800"
+    },
+    {
+      icon: "🛡️",
+      title: "24/7 Security",
+      description: "Your safety and privacy are our priority. Enjoy round-the-clock security with biometric access, CCTV surveillance, secure lockers, and a professional management team.",
+      color: "bg-red-100",
+      textColor: "text-red-800"
+    },
+    {
+      icon: "💻",
+      title: "Tech-Enabled Environment",
+      description: "Work smarter with our tech-friendly infrastructure. Enjoy plug-and-play workstations, multiple power outlets, whiteboard spaces, and support for all your tech needs.",
+      color: "bg-indigo-100",
+      textColor: "text-indigo-800"
+    }
+  ];
+
+  return (
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="py-16 px-4 bg-white"
+    >
+      <div className="container mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Why Choose Cowork Assam?
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Experience a workspace that goes beyond just a desk. We provide an ecosystem designed to fuel your productivity, creativity, and growth.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {chooseUsCategories.map((category, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1 
+              }}
+              className={`
+                ${category.color} ${category.textColor} 
+                p-6 rounded-xl shadow-md transform transition-all 
+                hover:scale-105 hover:shadow-lg
+              `}
+            >
+              <div className="text-4xl mb-4">{category.icon}</div>
+              <h3 className="text-xl font-bold mb-3">{category.title}</h3>
+              <p className="text-base opacity-80">{category.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
+// Team Members Component
+const TeamMembers: React.FC = () => {
+  const teamMembers = [
+    { 
+      name: "Vikram Sharma", 
+      role: "Founder & CEO", 
+      image: "/path/to/vikram-image.jpg"
+    },
+    { 
+      name: "Meera Patel", 
+      role: "Community Manager", 
+      image: "/path/to/meera-image.jpg"
+    },
+    { 
+      name: "Rajiv Das", 
+      role: "Operations Director", 
+      image: "/path/to/rajiv-image.jpg"
+    }
+  ];
+
+  return (
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full py-16 px-4"
+    >
+      <div className="container mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Meet Our Team
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            The passionate individuals who make Cowork Assam a vibrant community of innovation and collaboration.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1 
+              }}
+              className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md"
+            >
+              <img 
+                src={member.image} 
+                alt={member.name}
+                className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg"
+              />
+              <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
+              <p className="text-gray-600">{member.role}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.section>
+  );
+};
+
+// Main About Component
+const About: React.FC = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
   const [typedText, setTypedText] = useState("");
   const fullText =
-    "Cowork Assam is a coworking space located in Guwahati, Assam. It provides a flexible and affordable workspace for freelancers, remote workers, startups, and entrepreneurs. Coworking spaces like Cowork Assam offer shared office environments with amenities such as high-speed internet, meeting rooms, private cabins, and community events. It's ideal for individuals or small teams who want to work in a professional setting without the commitment of a traditional office lease. Along with workstations, these spaces often foster networking and collaboration through workshops, events, and community engagement. If you're considering visiting or working from there, I can help you find more details or even check out their website if you'd like!";
+    "Cowork Assam is a coworking space located in Guwahati, Assam. It provides a flexible and affordable workspace for freelancers, remote workers, startups, and entrepreneurs. Coworking spaces like Cowork Assam offer shared office environments with amenities such as high-speed internet, meeting rooms, private cabins, and community events.";
 
+  // Refs for scroll animations
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+
+  // Animation controls
+  const controls1 = useAnimation();
+  const controls2 = useAnimation();
+
+  // Inview checks
+  const inView1 = useInView(ref1, { once: true });
+  const inView2 = useInView(ref2, { once: true });
+
+  // Typing effect
   useEffect(() => {
     let currentIndex = 0;
     const typingInterval = setInterval(() => {
@@ -17,200 +199,105 @@ const About = () => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 30); // Adjust speed of typing here (lower number = faster)
+    }, 30);
 
     return () => clearInterval(typingInterval);
   }, []);
 
-  return (
-    <div>
-      {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">About Cowork Assam</h1>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl">
-                  Guwahati&apos;s premier coworking space designed for productivity and community.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 lg:grid-cols-2">
-              <img
-                alt="Cowork Assam workspace"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
-                src={flexible}
-              />
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h2 className="text-2xl font-bold">Our Story</h2>
-                  <p className="text-muted-foreground">
-                    Cowork Assam was founded in 2020 with a simple mission: to create a space where professionals in
-                    Guwahati could work, connect, and thrive. We recognized the growing need for flexible workspaces
-                    that cater to the evolving work culture, especially for freelancers, remote workers, and startups.
-                  </p>
-                  <p className="text-muted-foreground">
-                    What started as a small shared office has now grown into Guwahati&apos;s premier coworking
-                    community, hosting hundreds of professionals across various industries.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+  // Scroll animations
+  useEffect(() => {
+    if (inView1) controls1.start("visible");
+    if (inView2) controls2.start("visible");
+  }, [inView1, inView2]);
 
-      {/* About Cowork Assam Section */}
-      <section className="h-[calc(100vh-80px)] flex justify-center items-center">
-        <div className="h-[80%] w-[80%] flex justify-center items-center bg-orange-100 rounded-lg px-8">
-          <p className="font-inter text-center text-lg">
-            <span className="overflow-hidden border-r-2 border-black animate-blink-caret">
-              {typedText}
-            </span>
+  // Animation variants
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  return (
+    <div className="bg-white">
+      {/* Hero Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="w-full  md:h-[60vh]"
+      >
+<BackgroundShapes/>
+        <div className="container mx-auto md:px-4 py-16">
+          <div className="text-center space-y-6">
+            <motion.h1 
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-6xl md:text-[12rem] font-bold tracking-tight text-green-500 [text-shadow:3px_3px_0px_black]"
+            >
+              Coworksssam
+            </motion.h1>
+            <p className="text-sm mx-auto md:text-xl text-gray-600">
+              Guwahati&apos;s premier coworking space designed for productivity and community.
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Our Story Section */}
+      <motion.section 
+        ref={ref1}
+        initial="hidden"
+        animate={controls1}
+        variants={fadeInVariants}
+        className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center"
+      >
+        <motion.img 
+          src={flexibleImg} 
+          alt="Cowork Assam workspace"
+          className="rounded-xl shadow-lg object-cover w-full h-96"
+        />
+        <div>
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">Our Story</h2>
+          <p className="text-gray-600 mb-4">
+            Cowork Assam was founded in 2020 with a simple mission: to create a space where professionals in Guwahati could work, connect, and thrive.
+          </p>
+          <p className="text-gray-600">
+            What started as a small shared office has now grown into Guwahati&apos;s premier coworking community, hosting hundreds of professionals across various industries.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* Typing Animation Section */}
+      <motion.section 
+        ref={ref2}
+        initial="hidden"
+        animate={controls2}
+        variants={fadeInVariants}
+        className="bg-orange-50 py-16 px-4"
+      >
+        <div className="container mx-auto max-w-3xl bg-orange-100 p-8 rounded-xl">
+          <p className="text-center text-lg text-gray-800">
+            {typedText}
             <span className="animate-blink">|</span>
           </p>
         </div>
-      </section>
-
-      {/* About Section */}
-      <section className="h-[calc(100vh-80px)] flex justify-center items-center">
-        <div className="h-[80%] w-[80%] bg-brown-500 rounded-lg flex overflow-hidden">
-          <div className="w-[40%] h-full bg-cover bg-center bg-local transition-transform duration-500 hover:scale-110" style={{ backgroundImage: `url(${aboutIMG})`}}></div>
-          <div className="w-[60%] h-full bg-amber-100 px-8 py-20">
-            <h2 className="text-2xl font-bold mb-6">Our Mission</h2>
-            <p>
-              At Cowork Assam, our mission is to empower freelancers, remote
-              workers, startups, and entrepreneurs by providing a dynamic and
-              inclusive workspace that nurtures productivity, creativity, and
-              collaboration. We believe that great ideas are born in supportive
-              environments. Our goal is to create a community-driven coworking
-              space where individuals can connect, learn, and grow together. By
-              offering flexible and affordable workspace solutions, we aim to
-              eliminate barriers and provide opportunities for professionals to
-              focus on what they do best — building, creating, and innovating.
-              Through state-of-the-art facilities, vibrant networking
-              opportunities, and knowledge-sharing events, we are committed to
-              fostering a culture of growth and success in the heart of Assam.
-              At Cowork Assam, we don't just offer a desk — we offer a place
-              where your ambitions can thrive.
-            </p>
-          </div>
-        </div>
-      </section>
+      </motion.section>
 
       {/* Why Choose Us Section */}
-      <section className="mt-16 flex flex-col items-center mb-20">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-extrabold">Why Choose Us?</h1>
-        </div>
+      <WhyChooseUs />
 
-        {/* State-of-the-Art Amenities */}
-        <div className="h-[45vh] w-[80%] flex justify-center gap-10 mb-10">
-          <div className="h-full w-[35%] bg-cover bg-center bg-local rounded-lg transition-transform duration-500 hover:scale-110" style={{ backgroundImage: `url(${amenities})`}}></div>
-          <div className="h-full w-[50%] bg-blue-500 text-white rounded-lg px-8 py-12">
-            <h2 className="text-2xl font-bold">State-of-the-Art Amenities</h2>
-            <p className="mt-4">
-              Experience a productive work environment with high-speed internet,
-              ergonomic seating, meeting rooms, private cabins, and refreshment
-              areas — all designed to enhance your work experience.
-            </p>
-          </div>
-        </div>
+      {/* Team Members Section */}
+      <TeamMembers />
 
-        {/* Collaborative Community */}
-        <div className="h-[45vh] w-[80%] flex justify-center gap-10 mb-10">
-          <div className="h-full w-[50%] bg-blue-500 text-white rounded-lg px-8 py-12">
-            <h2 className="text-2xl font-bold">Collaborative Community</h2>
-            <p className="mt-4">
-              Be part of a vibrant community of innovators, entrepreneurs, and
-              professionals. Network, exchange ideas, and grow your connections
-              through our regular workshops, events, and collaborative spaces.
-            </p>
-          </div>
-          <div className="h-full w-[35%] bg-cover bg-center bg-local rounded-lg transition-transform duration-500 hover:scale-110" style={{ backgroundImage: `url(${community})` }}></div>
-        </div>
-
-        {/* Flexible and Affordable Plans */}
-        <div className="h-[45vh] w-[80%] flex justify-center gap-10">
-          <div className="h-full w-[35%] bg-cover bg-center bg-local rounded-lg transition-transform duration-500 hover:scale-110" style={{ backgroundImage: `url(${flexible})` }}></div>
-          <div className="h-full w-[50%] bg-blue-500 text-white rounded-lg px-8 py-12">
-            <h2 className="text-2xl font-bold">Flexible and Affordable Plans</h2>
-            <p className="mt-4">
-              Enjoy complete flexibility with our customizable plans — from
-              daily passes to monthly memberships. No long-term commitments, no
-              hidden fees. Choose what works best for you and your business.
-            </p>
-          </div>
-        </div>
-
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Our Team</h2>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Meet the passionate individuals behind Cowork Assam who work tirelessly to create the perfect
-                    environment for our community.
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                <div className="flex flex-col items-center space-y-2">
-                  <img
-                    alt="Team Member"
-                    className="rounded-full object-cover"
-                    height="100"
-                    src="/placeholder.svg?height=100&width=100"
-                    style={{
-                      aspectRatio: "100/100",
-                      objectFit: "cover",
-                    }}
-                    width="100"
-                  />
-                  <div className="text-center">
-                    <h3 className="font-medium">Vikram Sharma</h3>
-                    <p className="text-sm text-muted-foreground">Founder & CEO</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <img
-                    alt="Team Member"
-                    className="rounded-full object-cover"
-                    height="100"
-                    src="/placeholder.svg?height=100&width=100"
-                    style={{
-                      aspectRatio: "100/100",
-                      objectFit: "cover",
-                    }}
-                    width="100"
-                  />
-                  <div className="text-center">
-                    <h3 className="font-medium">Meera Patel</h3>
-                    <p className="text-sm text-muted-foreground">Community Manager</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center space-y-2">
-                  <img
-                    alt="Team Member"
-                    className="rounded-full object-cover"
-                    height="100"
-                    src="/placeholder.svg?height=100&width=100"
-                    style={{
-                      aspectRatio: "100/100",
-                      objectFit: "cover",
-                    }}
-                    width="100"
-                  />
-                  <div className="text-center">
-                    <h3 className="font-medium">Rajiv Das</h3>
-                    <p className="text-sm text-muted-foreground">Operations Director</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
+      {/* Pricing Section */}
+      <PricingSection />
     </div>
   );
 };

@@ -1,23 +1,11 @@
-"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
-import emailjs from "emailjs-com";
+import { Check, Send } from "lucide-react";
+import emailjs from "emailjs-com"; // Update the path to match the correct location of the utils file
 
 export default function BookTour() {
-  const [formData, setFormData] = useState<{
-    name: string;
-    email: string;
-    phone: string;
-    company: string;
-    date: string;
-    time: string;
-    tourType: string;
-    interests: string[];
-    teamSize: string;
-    message: string;
-  }>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
@@ -25,52 +13,52 @@ export default function BookTour() {
     date: "",
     time: "",
     tourType: "In-Person Tour",
-    interests: [],
+    interests: [] as string[],
     teamSize: "Just me",
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target as HTMLInputElement;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    
     if (type === "checkbox") {
-      setFormData((prev) => ({
+      const checkedValue = (e.target as HTMLInputElement).value;
+      setFormData(prev => ({
         ...prev,
-        interests: checked ? [...prev.interests, value] : prev.interests.filter((i) => i !== value)
+        interests: prev.interests.includes(checkedValue)
+          ? prev.interests.filter(i => i !== checkedValue)
+          : [...prev.interests, checkedValue]
       }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     try {
-      // Send email using EmailJS
       const templateParams = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        company: formData.company,
-        date: formData.date,
-        time: formData.time,
-        tourType: formData.tourType,
-        interests: formData.interests.join(", "),
-        teamSize: formData.teamSize,
-        message: formData.message
+        ...formData,
+        interests: formData.interests.join(", ")
       };
 
       await emailjs.send(
-        "your_service_id", // Replace with your EmailJS Service ID
-        "your_template_id", // Replace with your EmailJS Template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "", 
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
         templateParams,
-        "your_public_key" // Replace with your EmailJS Public Key
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
-      console.log("Email sent successfully!");
       setSubmitted(true);
     } catch (error) {
       console.error("Error sending email:", error);
+      alert("Failed to book tour. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -91,84 +79,176 @@ export default function BookTour() {
   };
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-16 md:py-20 px-4 bg-gray-50">
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
-          className="text-4xl font-bold mb-4"
+          className="text-3xl md:text-4xl font-bold mb-4 text-gray-800"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Book a Tour
+          Book Your Workspace Tour
         </motion.h2>
         <motion.p
-          className="text-gray-600 mb-8 max-w-2xl mx-auto"
+          className="text-gray-600 mb-8 max-w-2xl mx-auto text-base md:text-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Experience Cowork Assam firsthand! Schedule a visit to explore our space, meet our community, and find the perfect spot for your work.
+          Discover the perfect workspace tailored to your needs. Schedule a personalized tour and explore our modern, flexible work environments.
         </motion.p>
       </div>
 
-      <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="max-w-2xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl">
         {!submitted ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input className="w-full p-2 border rounded" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
-            <input className="w-full p-2 border rounded" type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
-            <input className="w-full p-2 border rounded" type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required />
-            <input className="w-full p-2 border rounded" name="company" placeholder="Company (Optional)" value={formData.company} onChange={handleChange} />
-            <input className="w-full p-2 border rounded" type="date" name="date" value={formData.date} onChange={handleChange} required />
-            <input className="w-full p-2 border rounded" type="time" name="time" value={formData.time} onChange={handleChange} required />
-            <div>
-              <label>Tour Type:</label>
-              <div>
-                <input type="radio" name="tourType" value="In-Person Tour" checked={formData.tourType === "In-Person Tour"} onChange={handleChange} /> In-Person Tour
-                <input type="radio" name="tourType" value="Virtual Tour" checked={formData.tourType === "Virtual Tour"} onChange={handleChange} className="ml-4" /> Virtual Tour
+          <form onSubmit={handleSubmit} className="grid gap-4 grid-cols-1 md:grid-cols-2">
+            <input 
+              className="w-full p-3 border border-gray-300 rounded-lg col-span-1 md:col-span-2 focus:ring-2 focus:ring-blue-200 transition-all" 
+              name="name" 
+              placeholder="Full Name" 
+              value={formData.name} 
+              onChange={handleChange} 
+              required 
+            />
+            <input 
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 transition-all" 
+              type="email" 
+              name="email" 
+              placeholder="Email Address" 
+              value={formData.email} 
+              onChange={handleChange} 
+              required 
+            />
+            <input 
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 transition-all" 
+              type="tel" 
+              name="phone" 
+              placeholder="Phone Number" 
+              value={formData.phone} 
+              onChange={handleChange} 
+              required 
+            />
+            <input 
+              className="w-full p-3 border border-gray-300 rounded-lg col-span-1 md:col-span-2 focus:ring-2 focus:ring-blue-200 transition-all" 
+              name="company" 
+              placeholder="Company (Optional)" 
+              value={formData.company} 
+              onChange={handleChange} 
+            />
+            <div className="grid grid-cols-2 gap-4 col-span-1 md:col-span-2">
+              <input 
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 transition-all" 
+                type="date" 
+                name="date" 
+                value={formData.date} 
+                onChange={handleChange} 
+                required 
+              />
+              <input 
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 transition-all" 
+                type="time" 
+                name="time" 
+                value={formData.time} 
+                onChange={handleChange} 
+                required 
+              />
+            </div>
+
+            <div className="col-span-1 md:col-span-2">
+              <legend className="text-sm font-medium text-gray-700 mb-2">Tour Type</legend>
+              <div className="flex space-x-4">
+                {["In-Person Tour", "Virtual Tour"].map((type) => (
+                  <label key={type} className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="tourType"
+                      value={type}
+                      checked={formData.tourType === type}
+                      onChange={handleChange}
+                      className="form-radio text-blue-500"
+                    />
+                    <span className="ml-2">{type}</span>
+                  </label>
+                ))}
               </div>
             </div>
-            <div>
-              <label>What are you interested in? (Select all that apply)</label>
-              <div>
-                <input type="checkbox" name="interests" value="Hot Desk" checked={formData.interests.includes("Hot Desk")} onChange={handleChange} /> Hot Desk
-                <input type="checkbox" name="interests" value="Dedicated Desk" checked={formData.interests.includes("Dedicated Desk")} onChange={handleChange} className="ml-4" /> Dedicated Desk
-                <input type="checkbox" name="interests" value="Private Office" checked={formData.interests.includes("Private Office")} onChange={handleChange} className="ml-4" /> Private Office
-                <input type="checkbox" name="interests" value="Meeting Rooms" checked={formData.interests.includes("Meeting Rooms")} onChange={handleChange} className="ml-4" /> Meeting Rooms
-                <input type="checkbox" name="interests" value="Event Space" checked={formData.interests.includes("Event Space")} onChange={handleChange} className="ml-4" /> Event Space
+
+            <div className="col-span-1 md:col-span-2">
+              <legend className="text-sm font-medium text-gray-700 mb-2">Interests</legend>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {["Hot Desk", "Dedicated Desk", "Private Office", "Meeting Rooms", "Event Space"].map((interest) => (
+                  <label key={interest} className="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      name="interests"
+                      value={interest}
+                      checked={formData.interests.includes(interest)}
+                      onChange={handleChange}
+                      className="form-checkbox text-blue-500"
+                    />
+                    <span className="ml-2 text-sm">{interest}</span>
+                  </label>
+                ))}
               </div>
             </div>
-            <div>
-              <label>Team Size:</label>
+
+            <div className="col-span-1 md:col-span-2">
+              <label htmlFor="teamSize" className="block text-sm font-medium text-gray-700 mb-2">Team Size</label>
               <select
-                className="w-full p-2 border rounded"
+                id="teamSize"
                 name="teamSize"
                 value={formData.teamSize}
-                onChange={(e) => setFormData((prev) => ({ ...prev, teamSize: e.target.value }))}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-200 transition-all"
               >
-                <option value="Just me">Just me</option>
-                <option value="2-5">2-5 members</option>
-                <option value="6-10">6-10 members</option>
-                <option value="11-20">11-20 members</option>
-                <option value="21-50">21-50 members</option>
-                <option value="50+">50+ members</option>
+                {["Just me", "2-5", "6-10", "11-20", "21-50", "50+"].map((size) => (
+                  <option key={size} value={size}>{size} members</option>
+                ))}
               </select>
             </div>
+
             <textarea
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-300 rounded-lg col-span-1 md:col-span-2 focus:ring-2 focus:ring-blue-200 transition-all"
               name="message"
               placeholder="Additional Information (Optional)"
               value={formData.message}
               onChange={handleChange}
+              rows={4}
             />
-            <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded cursor-pointer">Book a Tour</button>
+
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className={
+                `${isSubmitting 
+                  ? "col-span-1 md:col-span-2 w-full p-3 rounded-lg text-white font-semibold transition-all bg-blue-300 cursor-not-allowed" 
+                  : "col-span-1 md:col-span-2 w-full p-3 rounded-lg text-white font-semibold transition-all bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"}`
+}
+            >
+              {isSubmitting ? "Booking..." : (
+                <span className="flex items-center justify-center">
+                  <Send className="mr-2 h-5 w-5" /> Book a Tour
+                </span>
+              )}
+            </button>
           </form>
         ) : (
-          <div className="text-center">
-            <Check className="w-12 h-12 text-green-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold">Tour Booked Successfully!</h3>
-            <p className="text-gray-600 mt-2">We'll get in touch with you soon.</p>
-            <button onClick={handleBookAgain} className="mt-4 p-2 bg-blue-500 text-white rounded">Book Again</button>
-          </div>
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Check className="w-16 h-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Tour Booked Successfully!</h3>
+            <p className="text-gray-600 mb-4">We'll contact you shortly to confirm your tour details.</p>
+            <button 
+              onClick={handleBookAgain} 
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Book Another Tour
+            </button>
+          </motion.div>
         )}
       </div>
     </section>
