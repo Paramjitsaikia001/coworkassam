@@ -7,6 +7,9 @@ import { MotionConfig } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import { MapPin, Star } from 'lucide-react';
 import PricingSection from './Pricing';
+import ContactButton from './Contact';
+
+
 import private_img from '../assets/private_img.avif';
 import hotdesks from '../assets/HOtdesk.avif';
 import meetingroom from '../assets/meetingroom.avif';
@@ -74,7 +77,7 @@ const HeroSection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="hero-section py-10 px-6 md:py-10 flex flex-col-reverse md:flex-row justify-between gap-12 h-auto md:h-[78vh] relative"
+        className="hero-section py-10 px-2 md:px-6 md:py-10 flex flex-col-reverse md:flex-row justify-between gap-12 h-[70vh] md:h-[78vh] relative"
     >
         <div className="w-[80%] md:w-[30%] flex flex-col md:justify-end md:pb-8 items-baseline gap-4">
             <p className="text-base md:text-lg">
@@ -717,7 +720,7 @@ const FeaturesAmenities = () => {
                                    shadow-md transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
                     >
                         {/* Feature Icon */}
-                        <div className="text-blue-600 mb-4">{feature.icon}</div>
+                        <div className="text-blue-600 mb-4" aria-label="High-speed Wi-Fi">{feature.icon}</div>
 
                         {/* Feature Title */}
                         <h3 className="text-xl font-bold mb-2 text-gray-900">
@@ -857,7 +860,7 @@ function LocationSection() {
                             )
                         }
                     >
-                        <MapPin className="text-blue-500 h-8 w-8" />
+                        <MapPin className="text-blue-500 h-8 w-8" aria-label="Location pin for Cowork Assam" />
                         <div>
                             <p className="font-semibold text-gray-800">
                                 Digital Notice Media Labs
@@ -897,6 +900,7 @@ function LocationSection() {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         className="w-full content-cover"
+                         title="Google Maps location of Cowork Assam"
                     ></iframe>
                 </motion.div>
             </div>
@@ -1137,6 +1141,7 @@ function Landing() {
     return (
         <div className="min-h-screen bg-white">
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+                <ContactButton/>
                 <HeroSection />
                 <CategorySection />
                 <AboutSection />

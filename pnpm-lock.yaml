@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@emailjs/browser':
+        specifier: ^4.4.1
+        version: 4.4.1
       '@radix-ui/react-slot':
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.0.10)(react@19.0.0)
@@ -20,9 +23,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      emailjs-com:
-        specifier: ^3.2.0
-        version: 3.2.0
       framer-motion:
         specifier: ^12.5.0
         version: 12.5.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -187,6 +187,10 @@ packages:
   '@babel/types@7.26.10':
     resolution: {integrity: sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==}
     engines: {node: '>=6.9.0'}
+
+  '@emailjs/browser@4.4.1':
+    resolution: {integrity: sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==}
+    engines: {node: '>=14.0.0'}
 
   '@esbuild/aix-ppc64@0.25.1':
     resolution: {integrity: sha512-kfYGy8IdzTGy+z0vFGvExZtxkFlA4zAxgKEahG9KE1ScBjpQnFsNOX8KTU5ojNru5ed5CVoJYXFtoxaq5nFbjQ==}
@@ -821,11 +825,6 @@ packages:
 
   email-addresses@5.0.0:
     resolution: {integrity: sha512-4OIPYlA6JXqtVn8zpHpGiI7vE6EQOAg16aGnDMIAlZVinnoZ8208tW1hAbjWydgN/4PLTT9q+O1K6AH/vALJGw==}
-
-  emailjs-com@3.2.0:
-    resolution: {integrity: sha512-Prbz3E1usiAwGjMNYRv6EsJ5c373cX7/AGnZQwOfrpNJrygQJ15+E9OOq4pU8yC977Z5xMetRfc3WmDX6RcjAA==}
-    engines: {node: '>=12.0.0'}
-    deprecated: The SDK name changed to @emailjs/browser
 
   enhanced-resolve@5.18.1:
     resolution: {integrity: sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg==}
@@ -1624,6 +1623,8 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
+  '@emailjs/browser@4.4.1': {}
+
   '@esbuild/aix-ppc64@0.25.1':
     optional: true
 
@@ -2142,8 +2143,6 @@ snapshots:
   electron-to-chromium@1.5.119: {}
 
   email-addresses@5.0.0: {}
-
-  emailjs-com@3.2.0: {}
 
   enhanced-resolve@5.18.1:
     dependencies:

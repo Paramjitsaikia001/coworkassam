@@ -2,6 +2,11 @@ import { NavLink } from "react-router";
 
 
 function Footer() {
+    const phoneNumber = "919395xxxxx"; // Replace with your WhatsApp number
+      
+    const handleConnectClick = () => {
+      window.open(`https://wa.me/${phoneNumber}`, "_blank");
+    };
     return (
         <footer className="bg-gradient-to-b from-[#284431] to-black text-white py-20 font-mono text-center w-[100wh]">
             <div className="flex md:flex-row flex-col gap-8 md:gap-0 justify-between w-full px-6">
@@ -16,7 +21,7 @@ function Footer() {
                 </div>
 
                 <div className="flex gap-4 flex-col md:w-[30%] w-full md:text-md text-sm md:text-end text-start">
-                    <h2 className=" ">
+                    <h2 className=" text-[#00bcd4]">
                     Experience Our Community First-Hand
                     </h2>
                     <h2 className=" ">
@@ -32,7 +37,9 @@ function Footer() {
                     >
                         book a tour
                     </NavLink>
-                    <button className="border-[#00bcd4] text-white border-2 py-3 px-6  text-base cursor-pointer rounded-full hover:bg-[#0097a7]">
+                    <button
+                    onClick={handleConnectClick}
+                    className="border-[#00bcd4] text-white border-2 py-3 px-6  text-base cursor-pointer rounded-full hover:bg-[#0097a7]">
                         Contact us
                     </button>
                     </div>
@@ -43,36 +50,28 @@ function Footer() {
                     <h3 className="text-[#00bcd4]">Quick Links</h3>
                     <ul className="list-none p-0">
                         <li>
-                            <a
-                                href="index.html"
+                                <NavLink
+                to="/"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 Home
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a
-                                href="service.html"
-                                className="text-white no-underline transition-colors hover:text-[#00bcd4]"
-                            >
-                                Services
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="contact.html"
+                              <NavLink
+                to="/booktour"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 Contact
-                            </a>
+                            </NavLink>
                         </li>
                         <li>
-                            <a
-                                href="about.html"
+                                <NavLink
+                to="/about"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 About
-                            </a>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
@@ -83,7 +82,7 @@ function Footer() {
                     <p>Address: 123 Gandhi Road, Guwahati, Assam 781001</p>
                 </div>
                 <div className="flex w-[30%]  flex-col text-start">
-                    <h3 className="text-[#00bcd4] hidden">Follow Us</h3>
+                    <h3 className="text-[#00bcd4] hidden md:block">Follow Us</h3>
                     <div className="md:flex hidden">
                         <a href="https://www.facebook.com/" target="_blank">
                             <img
