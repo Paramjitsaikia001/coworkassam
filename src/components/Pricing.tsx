@@ -2,13 +2,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
     Check,
-    Coffee,
-    Wifi,
     Calendar,
     Users,
     Monitor,
     Clock,
-    Zap,
 } from 'lucide-react';
 
 export default function PricingSection() {

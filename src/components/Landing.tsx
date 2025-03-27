@@ -13,6 +13,7 @@ import meetingroom from '../assets/meetingroom.avif';
 import events from '../assets/events.avif';
 import virtual from '../assets/virtualoffice.webp';
 import enterprise from '../assets/enterprise.webp';
+import { NavLink } from 'react-router';
 // Define types
 type Category = {
     id: string;
@@ -82,13 +83,13 @@ const HeroSection = () => (
                 upcoming project, find it all on the CoWorkSpaces marketplace.
             </p>
             <div className="flex flex-col gap-3 w-full ">
-                <button
-                    onClick={() => (window.location.href = '/booktour')}
+                <NavLink
+                to="/booktour"
                     className="bg-black rounded-3xl py-3 px-8 text-white items-start flex cursor-pointer hover:bg-gray-800 transition-colors"
                     aria-label="Book your space"
                 >
                     Book your space
-                </button>
+                </NavLink>
                 <button
                     className="bg-black/25 rounded-3xl py-3 px-8 text-black items-start flex cursor-pointer hover:bg-black/30 transition-colors "
                     aria-label="Schedule a free tour"

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 
 
 function Footer() {
@@ -25,12 +26,12 @@ function Footer() {
                         </p>
                     </h2>
                     <div className="flex items-start gap-3  md:justify-end ">
-                    <button
-                        onClick={() => (window.location.href = '/booktour')}
+                  <NavLink
+                to="/booktour"
                         className="bg-[#00bcd4] text-white border-none py-3 px-6   text-base cursor-pointer rounded-full hover:bg-[#0097a7]"
                     >
                         book a tour
-                    </button>
+                    </NavLink>
                     <button className="border-[#00bcd4] text-white border-2 py-3 px-6  text-base cursor-pointer rounded-full hover:bg-[#0097a7]">
                         Contact us
                     </button>
