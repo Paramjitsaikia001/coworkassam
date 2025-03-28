@@ -9,7 +9,6 @@ import { MapPin, Star } from 'lucide-react';
 import PricingSection from './Pricing';
 import ContactButton from './Contact';
 
-
 import private_img from '../assets/private_img.avif';
 import hotdesks from '../assets/HOtdesk.avif';
 import meetingroom from '../assets/meetingroom.avif';
@@ -87,7 +86,7 @@ const HeroSection = () => (
             </p>
             <div className="flex flex-col gap-3 w-full ">
                 <NavLink
-                to="/booktour"
+                    to="/booktour"
                     className="bg-black rounded-3xl py-3 px-8 text-white items-start flex cursor-pointer hover:bg-gray-800 transition-colors"
                     aria-label="Book your space"
                 >
@@ -720,7 +719,12 @@ const FeaturesAmenities = () => {
                                    shadow-md transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
                     >
                         {/* Feature Icon */}
-                        <div className="text-blue-600 mb-4" aria-label="High-speed Wi-Fi">{feature.icon}</div>
+                        <div
+                            className="text-blue-600 mb-4"
+                            aria-label="High-speed Wi-Fi"
+                        >
+                            {feature.icon}
+                        </div>
 
                         {/* Feature Title */}
                         <h3 className="text-xl font-bold mb-2 text-gray-900">
@@ -860,7 +864,10 @@ function LocationSection() {
                             )
                         }
                     >
-                        <MapPin className="text-blue-500 h-8 w-8" aria-label="Location pin for Cowork Assam" />
+                        <MapPin
+                            className="text-blue-500 h-8 w-8"
+                            aria-label="Location pin for Cowork Assam"
+                        />
                         <div>
                             <p className="font-semibold text-gray-800">
                                 Digital Notice Media Labs
@@ -900,7 +907,7 @@ function LocationSection() {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         className="w-full content-cover"
-                         title="Google Maps location of Cowork Assam"
+                        title="Google Maps location of Cowork Assam"
                     ></iframe>
                 </motion.div>
             </div>
@@ -1141,7 +1148,7 @@ function Landing() {
     return (
         <div className="min-h-screen bg-white">
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-                <ContactButton/>
+                <ContactButton />
                 <HeroSection />
                 <CategorySection />
                 <AboutSection />

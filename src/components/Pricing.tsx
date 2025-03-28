@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-    Check,
-    Calendar,
-    Users,
-    Monitor,
-    Clock,
-} from 'lucide-react';
+import { Check, Calendar, Users, Monitor, Clock } from 'lucide-react';
 
 export default function PricingSection() {
     const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>(
@@ -138,7 +132,7 @@ export default function PricingSection() {
     };
 
     function sendEmail(planName: string) {
-        const email = "example@coworkassam.com"; // Replace with your email address
+        const email = 'example@coworkassam.com'; // Replace with your email address
         const subject = `Booking Request for ${planName}`;
         const body = `Hello,\n\nI would like to book a tour for the "${planName}" plan. Please provide more details.\n\nThank you.`;
         window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

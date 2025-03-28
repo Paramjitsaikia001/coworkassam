@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import BookTour from './components/bookTour';
 function App() {
     return (
-        <BrowserRouter >
+        <BrowserRouter>
             <Navbar />
             <div className="mt-20">
                 <Routes>

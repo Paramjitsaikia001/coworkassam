@@ -1,11 +1,10 @@
-import { NavLink } from "react-router";
-
+import { NavLink } from 'react-router';
 
 function Footer() {
-    const phoneNumber = "919395xxxxx"; // Replace with your WhatsApp number
-      
+    const phoneNumber = '919395xxxxx'; // Replace with your WhatsApp number
+
     const handleConnectClick = () => {
-      window.open(`https://wa.me/${phoneNumber}`, "_blank");
+        window.open(`https://wa.me/${phoneNumber}`, '_blank');
     };
     return (
         <footer className="bg-gradient-to-b from-[#284431] to-black text-white py-20 font-mono text-center w-[100wh]">
@@ -22,7 +21,7 @@ function Footer() {
 
                 <div className="flex gap-4 flex-col md:w-[30%] w-full md:text-md text-sm md:text-end text-start">
                     <h2 className=" text-[#00bcd4]">
-                    Experience Our Community First-Hand
+                        Experience Our Community First-Hand
                     </h2>
                     <h2 className=" ">
                         <p>
@@ -31,17 +30,18 @@ function Footer() {
                         </p>
                     </h2>
                     <div className="flex items-start gap-3  md:justify-end ">
-                  <NavLink
-                to="/booktour"
-                        className="bg-[#00bcd4] text-white border-none py-3 px-6   text-base cursor-pointer rounded-full hover:bg-[#0097a7]"
-                    >
-                        book a tour
-                    </NavLink>
-                    <button
-                    onClick={handleConnectClick}
-                    className="border-[#00bcd4] text-white border-2 py-3 px-6  text-base cursor-pointer rounded-full hover:bg-[#0097a7]">
-                        Contact us
-                    </button>
+                        <NavLink
+                            to="/booktour"
+                            className="bg-[#00bcd4] text-white border-none py-3 px-6   text-base cursor-pointer rounded-full hover:bg-[#0097a7]"
+                        >
+                            book a tour
+                        </NavLink>
+                        <button
+                            onClick={handleConnectClick}
+                            className="border-[#00bcd4] text-white border-2 py-3 px-6  text-base cursor-pointer rounded-full hover:bg-[#0097a7]"
+                        >
+                            Contact us
+                        </button>
                     </div>
                 </div>
             </div>
@@ -50,24 +50,24 @@ function Footer() {
                     <h3 className="text-[#00bcd4]">Quick Links</h3>
                     <ul className="list-none p-0">
                         <li>
-                                <NavLink
-                to="/"
+                            <NavLink
+                                to="/"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 Home
                             </NavLink>
                         </li>
                         <li>
-                              <NavLink
-                to="/booktour"
+                            <NavLink
+                                to="/booktour"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 Contact
                             </NavLink>
                         </li>
                         <li>
-                                <NavLink
-                to="/about"
+                            <NavLink
+                                to="/about"
                                 className="text-white no-underline transition-colors hover:text-[#00bcd4]"
                             >
                                 About
@@ -82,7 +82,9 @@ function Footer() {
                     <p>Address: 123 Gandhi Road, Guwahati, Assam 781001</p>
                 </div>
                 <div className="flex w-[30%]  flex-col text-start">
-                    <h3 className="text-[#00bcd4] hidden md:block">Follow Us</h3>
+                    <h3 className="text-[#00bcd4] hidden md:block">
+                        Follow Us
+                    </h3>
                     <div className="md:flex hidden">
                         <a href="https://www.facebook.com/" target="_blank">
                             <img
@@ -136,49 +138,49 @@ function Footer() {
                 <p>©️ 2025 CoworkAssam. All Rights Reserved.</p>
             </div>
             <div className="md:hidden pt-8 flex items-center justify-center gap-4">
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <img
-                                src="https://www.freeiconspng.com/uploads/facebook-logo-png-white-image-galleries--imagekbm-25.png"
-                                alt="Facebook"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                        <a href="https://www.instagram.com/" target="_blank">
-                            <img
-                                src="https://tse1.mm.bing.net/th?id=OIP.miENnckLURUKhMbu8TDL5gHaHa&pid=Api&P=0&h=180"
-                                alt="Instagram"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                        <a href="https://www.linkedin.com/" target="_blank">
-                            <img
-                                src="https://tse3.mm.bing.net/th?id=OIP._zWnyIucuXe-KdIdFFvl2gHaHa&pid=Api&P=0&h=180"
-                                alt="LinkedIn"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                        <a href="https://www.whatsapp.com/" target="_blank">
-                            <img
-                                src="https://tse2.mm.bing.net/th?id=OIP.5yezTgNqmRch35iJsm0xBQHaHa&pid=Api&P=0&h=180"
-                                alt="WhatsApp"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                        <a href="https://www.telegram.com/" target="_blank">
-                            <img
-                                src="https://c0.klipartz.com/pngpicture/309/9/gratis-png-telegramas-iconos-de-ordenador-aplicaciones-de-mensajeria.png"
-                                alt="Telegram"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                        <a href="https://x.com/" target="_blank">
-                            <img
-                                src="https://static.vecteezy.com/system/resources/previews/027/395/710/original/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.png"
-                                alt="X"
-                                className="w-8 h-8  rounded-full transition-transform hover:scale-110"
-                            />
-                        </a>
-                    </div>
+                <a href="https://www.facebook.com/" target="_blank">
+                    <img
+                        src="https://www.freeiconspng.com/uploads/facebook-logo-png-white-image-galleries--imagekbm-25.png"
+                        alt="Facebook"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <img
+                        src="https://tse1.mm.bing.net/th?id=OIP.miENnckLURUKhMbu8TDL5gHaHa&pid=Api&P=0&h=180"
+                        alt="Instagram"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <img
+                        src="https://tse3.mm.bing.net/th?id=OIP._zWnyIucuXe-KdIdFFvl2gHaHa&pid=Api&P=0&h=180"
+                        alt="LinkedIn"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+                <a href="https://www.whatsapp.com/" target="_blank">
+                    <img
+                        src="https://tse2.mm.bing.net/th?id=OIP.5yezTgNqmRch35iJsm0xBQHaHa&pid=Api&P=0&h=180"
+                        alt="WhatsApp"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+                <a href="https://www.telegram.com/" target="_blank">
+                    <img
+                        src="https://c0.klipartz.com/pngpicture/309/9/gratis-png-telegramas-iconos-de-ordenador-aplicaciones-de-mensajeria.png"
+                        alt="Telegram"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+                <a href="https://x.com/" target="_blank">
+                    <img
+                        src="https://static.vecteezy.com/system/resources/previews/027/395/710/original/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.png"
+                        alt="X"
+                        className="w-8 h-8  rounded-full transition-transform hover:scale-110"
+                    />
+                </a>
+            </div>
         </footer>
     );
 }
