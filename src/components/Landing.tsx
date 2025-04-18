@@ -79,7 +79,7 @@ const HeroSection = () => (
         className="hero-section py-10 px-2 md:px-6 md:py-10 flex flex-col-reverse md:flex-row justify-between gap-12 h-[70vh] md:h-[78vh] relative"
     >
         <div className="w-[80%] md:w-[30%] flex flex-col md:justify-end md:pb-8 items-baseline gap-4">
-            <p className="text-base md:text-lg">
+            <p className="text-[0.99rem] md:text-lg">
                 Whether you're a freelancer looking for your next creative space
                 or a team searching for a collaborative environment for your
                 upcoming project, find it all on the CoWorkSpaces marketplace.
@@ -101,7 +101,7 @@ const HeroSection = () => (
             </div>
         </div>
         <div className="w-full md:w-auto mt-8 md:mt-0 z-10">
-            <h1 className="flex flex-col items-end md:items-end text-6xl md:text-8xl lg:text-[8.5rem] font-extrabold leading-none ">
+            <h1 className="flex flex-col items-end md:items-end text-[4.2rem] md:text-8xl lg:text-[8.5rem] font-extrabold leading-none ">
                 Where <br />
                 <span className="text-green-500 [text-shadow:3px_3px_0px_black]">
                     Innovation
